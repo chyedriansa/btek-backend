@@ -14,7 +14,7 @@ CREATE TABLE "users" (
     "email" VARCHAR (255),
     "password" VARCHAR (255),
     "createdAt" TIMESTAMPTZ DEFAULT now(),
-    "uodatedAt" TIMESTAMPTZ
+    "updatedAt" TIMESTAMPTZ
 );
 
 ALTER TABLE "users" ADD PRIMARY KEY ("id");
