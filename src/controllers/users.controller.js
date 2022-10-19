@@ -27,7 +27,7 @@ exports.readAllUsers = async(req, res) => {
             page: req.query.page,
             limit: req.query.limit
         };
-        pageInfo.totalPage = math.cell(rowCount / req.query.limit);
+        pageInfo.totalPage = Math.ceil(rowCount / req.query.limit);
         pageInfo.nextpage = req.query.page < pageInfo.totalPage ? req.query.page + 1 : null;
         pageInfo.prevPage = req.page > 1 ? req.query.page -1 : null;
         pageInfo.totaldata = rowCount;

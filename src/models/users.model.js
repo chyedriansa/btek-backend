@@ -10,7 +10,7 @@ exports.insertUser = (data) => {
 
 exports.selectAllUsers = () => {
   const sql = `SELECT * FROM "${table}"`;
-  const params = [data.limit, data.offset];
+//   const params = [data.limit, data.offset];
   return db.query(sql);
 };
 
@@ -26,10 +26,10 @@ exports.updateUserById = (id, email, password) => {
   return db.query(sql, params);
 };
 
-exports.selectAll = (data) => {
-    const sql = `SELECT * FROM ${table} WHERE "${data.searchBy}" LIKE '%${data.search}%'`;
-    return db.query(sql);
-  };
+// exports.selectAll = (data) => {
+//     const sql = `SELECT * FROM ${table} WHERE "${data.searchBy}" LIKE '%${data.search}%'`;
+//     return db.query(sql);
+//   };
 
 exports.deleteUserById = (data) => {
   const sql = `DELETE FROM ${table} WHERE id = $1 RETURNING *`;

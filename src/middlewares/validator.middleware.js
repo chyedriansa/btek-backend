@@ -1,4 +1,4 @@
-const { body, param, validationResult, query, matchedData, } = require('express-validator');
+const { body, param, validationResult, query, matchedDat} = require('express-validator');
 
 exports.createUser = [
     body('email').isEmail().withMessage('email is invalid'),
@@ -25,7 +25,8 @@ exports.paging = [
 
 exports.basicUserCreds = [
     body("email").isEmail().withMessage("Email is invalid"),
-    body("password").isStrongPassword({minLength: 8}).withMessage("Password length must have 8 character or more")
+    body("password")
+      .isStrongPassword({minLength: 8}).withMessage("Password length must have 8 character or more")
       .isStrongPassword({minUppercase: 1}).withMessage("Password must heve uppercase 1 or more")
       .isStrongPassword({minLowercase: 1}).withMessage("Password must heve lowercase 1 or more")
       .isStrongPassword({minNumbers: 1}).withMessage("Password must ve number 1 or more")
