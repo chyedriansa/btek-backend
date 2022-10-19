@@ -2,10 +2,12 @@ const users = require ("express").Router();
 
 const userController = require("../controllers/users.controller");
 
-users.post("/", userController.createUser);
-users.get("/", userController.readAllUsers);
-users.get("/:id", userController.readUserById);
-users.put("/:id", userController.editUserById);
-users.delete("/:id", userController.deleteUserById);
+const {basicUserCreds, paramsUUID, paging, check} = require('../middlewares/validator.middleware')
+
+users.get("/",  paging, check, userController.readAllUsers);
+users.get("/:id", paramsUUID, check,userController.readUserById);
+users.post("/", basicUserCreds, check, userController.createUser);
+users.put("/:id", paramsUUID, basicUserCreds, check, userController.editUserById);
+users.delete("/:id", paramsUUID, check, userController.deleteUserById);
 
 module.exports = users;

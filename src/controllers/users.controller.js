@@ -19,21 +19,30 @@ exports.createUser = async(req, res) => {
 
 
 exports.readAllUsers = async(req, res) => {
-  try {
-    const users = await userModel.selectAllUsers();
-
-    return res.json({
-      success: true,
-      message:"List All User",
-      result: users.rows
-    });
-  }catch (err){
-    return res.status(500).json({
-      success:false,
-      message: "Error"+err.message
-    });
-  }
-};
+  req.query.iffset = (req.query.page - 1) * req.query.limit;
+    try {
+        const users = await userModel.selectAllUsers();
+        const {rowCount} = await userModel.selectAllUsers(req.query);
+        const pageInfo = {
+            page: req.query.page,
+            limit: req.query.limit
+        };
+        pageInfo.totalPage = math.cell(rowCount / req.query.limit);
+        pageInfo.nextpage = req.query.page < pageInfo.totalPage ? req.query.page + 1 : null;
+        pageInfo.prevPage = req.page > 1 ? req.query.page -1 : null;
+        pageInfo.totaldata = rowCount;
+        return res.json({
+            success: true,
+            message:"List All User",
+            result: users.rows
+        });
+    }catch (err){
+        return res.status(500).json({
+        success:false,
+        message: "Error"+err.message
+        });
+    }
+    };
 
 exports.readUserById = async(req, res) => {
   try {
