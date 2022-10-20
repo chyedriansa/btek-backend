@@ -14,6 +14,11 @@ exports.selectAllUsers = (data) => {
     return db.query(sql, params);
   };
 
+exports.selectAll = (data) => {
+    const sql = `SELECT * FROM ${table} WHERE "${data.searchBy}" LIKE '%${data.search}%'`;
+    return db.query(sql);
+  };
+
 exports.selectUserById = (id) => {
   const sql = `SELECT * FROM "${table}" WHERE id=$1`;
   const params = [id];

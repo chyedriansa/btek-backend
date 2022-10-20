@@ -19,31 +19,32 @@ exports.createUser = async(req, res) => {
 
 
 exports.readAllUsers = async(req, res) => {
-  req.query.iffset = (req.query.page - 1) * req.query.limit;
+    req.query.offset = (req.query.page - 1) * req.query.limit;
     try {
-        const users = await userModel.selectAllUsers(req.query);
-        const {rowCount} = await userModel.selectAllUsers(req.query);
-        const pageInfo = {
-            page: req.query.page,
-            limit: req.query.limit
-        };
-        pageInfo.totalPage = Math.ceil(rowCount / req.query.limit);
-        pageInfo.nextpage = req.query.page < pageInfo.totalPage ? req.query.page + 1 : null;
-        pageInfo.prevPage = req.page > 1 ? req.query.page -1 : null;
-        pageInfo.totaldata = rowCount;
-        return res.json({
-            success: true,
-            message:"List All User",
-            pageInfo,
-            result: users.rows
-        });
-    }catch (err){
-        return res.status(500).json({
-        success:false,
-        message: "Error"+err.message
-        });
+      const users = await userModel.selectAllUsers(req.query);
+      const {rowCount} = await userModel.selectAll(req.query);
+      const pageInfo = {
+        page: req.query.page,
+        limit: req.query.limit
+      };
+      pageInfo.totalPage = Math.ceil(rowCount / req.query.limit);
+      pageInfo.nextPage = req.query.page < pageInfo.totalPage ? req.query.page + 1 : null;
+      pageInfo.prevPage = req.query.page > 1 ? req.query.page - 1 : null;
+      pageInfo.totalData = rowCount;
+      return res.json({
+        success: true,
+        message: "List all users",
+        pageInfo,
+        results: users.rows
+      });
+    } catch(err) {
+      return res.status(500).json({
+        success: false,
+        message: "Error : "+err.message
+      });
     }
-    };
+  };
+  
 
 exports.readUserById = async(req, res) => {
   try {
