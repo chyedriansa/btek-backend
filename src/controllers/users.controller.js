@@ -1,6 +1,8 @@
 const userModel = require ("../models/users.model");
+const argon = require ('argon2')
 
 exports.createUser = async(req, res) => {
+  req.body.password = await argon.hash(req.body.password);
   try{
     const insert = await userModel.insertUser(req.body);
     const user = insert.rows[0];
@@ -65,6 +67,7 @@ exports.readUserById = async(req, res) => {
 
 exports.editUserById = async(req, res) => {
   try {
+    req.body.password = await argon.hash(req.body.password);
     const update = await userModel.editUserById(req.params.id, req.body);
     const user = update.rows[0];
 
