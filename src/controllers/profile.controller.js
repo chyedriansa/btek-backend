@@ -2,7 +2,8 @@ const profileModel = require('../models/profile.model')
 
 exports.readProfileById = async(req, res)=> {
   try {
-    const profile = await profileModel.selectProfileByUserId(req.params.id || req.userData.id);
+    const profile = await profileModel.selectProfileByUserId(req.params.id);
+    
     if(profile.rowCount){
       return res.json({
         success: true,
