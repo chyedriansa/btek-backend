@@ -21,7 +21,7 @@ exports.createUser = async(req, res) => {
 exports.readAllUsers = async(req, res) => {
   req.query.iffset = (req.query.page - 1) * req.query.limit;
     try {
-        const users = await userModel.selectAllUsers();
+        const users = await userModel.selectAllUsers(req.query);
         const {rowCount} = await userModel.selectAllUsers(req.query);
         const pageInfo = {
             page: req.query.page,
@@ -34,6 +34,7 @@ exports.readAllUsers = async(req, res) => {
         return res.json({
             success: true,
             message:"List All User",
+            pageInfo,
             result: users.rows
         });
     }catch (err){
@@ -63,7 +64,7 @@ exports.readUserById = async(req, res) => {
 
 exports.editUserById = async(req, res) => {
   try {
-    const update = await userModel.updateUserById(req.params.id, req.body.email.password);
+    const update = await userModel.editUserById(req.params.id, req.body);
     const user = update.rows[0];
 
     return res.json({
