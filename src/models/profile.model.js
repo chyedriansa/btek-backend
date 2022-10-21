@@ -21,7 +21,6 @@ exports.updateProfileByUserId = (id,data) => {
     column.forEach((col, i)=>{
       conditionalSql.push(`"${col}"=$${2+i}`);
     });
-  
     const sql = `UPDATE "${table}" SET ${conditionalSql.join(", ")} WHERE "userId"=$1 RETURNING *`;
     const params = [id, ...val];
     return db.query(sql, params);

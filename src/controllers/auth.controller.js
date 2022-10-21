@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
         const valid = await argon.verify(selectedUser.password, req.body.password)
         if(valid){
             const {id} = selectedUser
-            const token = jwt.sign((id), process.env.APP_SECRET || 'default=key');
+            const token = jwt.sign({id:selectedUser.id}, process.env.APP_SECRET || 'default=key');
             return res.json({
                 success:true,
                 message: 'Login is success',
