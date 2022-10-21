@@ -52,3 +52,14 @@ exports.check = (req, res, next) => {
     }
     return next();
 }
+
+exports.passwordValid = [
+    body("newPassword").isLength({min: 4}).withMessage("Password length must be 8 char or more"),
+    body("confirmPassword").custom((value, { req }) => {
+      if (value !== req.body.newPassword) {
+        throw new Error("password doesn't match");
+      }
+  
+      return true;
+    })
+  ];

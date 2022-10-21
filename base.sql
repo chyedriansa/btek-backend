@@ -39,3 +39,22 @@ CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON "profile"
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
+
+CREATE TABLE "forgot-password"(
+    "id" VARCHAR(255) DEFAULT uuid_generate_v4(),
+    "email" VARCHAR(255),
+    "code" VARCHAR(255) DEFAULT uuid_generate_v4(),
+    "newPassword" VARCHAR(255), 
+    "confirmPassword" VARCHAR(255),
+    "userId" VARCHAR(255),
+    "createdAt" TIMESTAMPTZ DEFAULT now(),
+    "updatedAt" TIMESTAMPTZ
+);
+
+ALTER TABLE "forgot-password" ADD PRIMARY KEY ("id");
+
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON "forgot-password"
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();

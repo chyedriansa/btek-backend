@@ -25,3 +25,4 @@ exports.updateProfileByUserId = (id,data) => {
     const params = [id, ...val];
     return db.query(sql, params);
   };
+  
