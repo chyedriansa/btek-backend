@@ -1,10 +1,9 @@
-const profile = require ('express').Router()
-const auth = require ('../middlewares/auth.middleware')
+const profile = require("express").Router();
 
+const {paramsUUID, basicUserCreds, check} =  require("../middlewares/profile.middleware");
 
 profile.get("/", require("../controllers/profile.controller").readProfileById);
-profile.get("/:id", require("../controllers/profile.controller").readProfileById);
-profile.put("/", auth, require('../controllers/profile.controller').updateProfile);
+profile.get("/:id", paramsUUID, check, require("../controllers/profile.controller").readProfileById);
+profile.put("/", basicUserCreds, check, require("../controllers/profile.controller").updateProfile);
 
-
-module.exports = profile
+module.exports = profile;
