@@ -4,7 +4,7 @@ const profileModel = require("../models/profile.model");
 const forgotPasswordModel = require("../models/forgotPassword.model");
 const argon = require("argon2");
 const jwt = require("jsonwebtoken");
-// const nodemailer =  require("nodemailer");
+const nodemailer =  require("nodemailer");
 
 exports.login = async (req, res) => {
   try {
