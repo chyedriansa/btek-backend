@@ -75,7 +75,7 @@ exports.forgotPassword = async(req, res) => {
       const forgot = await forgotPasswordModel.insertForgotPassword(req.body);
       
       let transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: "email",
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASS_EMAIL
