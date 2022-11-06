@@ -9,7 +9,7 @@ exports.insertProfile = (data) => {
 };
 
 exports.selectProfileByUserId = (id) => {
-  const sql = `SELECT * FROM ${table} WHERE "userId" = $1`;
+  const sql = `SELECT * FROM ${table} WHERE "userId" = $1 OR "id" = $1`;
   const params = [id];
   return db.query(sql, params);
 };

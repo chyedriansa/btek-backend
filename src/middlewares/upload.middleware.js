@@ -9,7 +9,7 @@ const extGenerator = (mimetype) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join("assets", "uploads"));
+    cb(null, path.join("src","assets", "uploads"));
   },
   filename: async(req, file, cb) => {
     const ext = extGenerator(file.mimetype);
@@ -34,7 +34,7 @@ const mult = multer({
   storage,
   fileFilter,
   limits: {
-    fileSize: 8 * 1000 * 1000
+    fileSize: 1 * 1000 * 1000
   }
 });
 
