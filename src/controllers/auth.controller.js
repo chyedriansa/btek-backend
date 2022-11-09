@@ -49,7 +49,6 @@ exports.register = async (req, res) => {
             if (profile.rowCount) {
                 return res.json({
                     success: true,
-                    results: createdUser,
                     message: "Register successfully"
                 });
             }
