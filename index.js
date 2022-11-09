@@ -5,7 +5,7 @@ const path = require("path");
 
 const app = express();
 
-app.use(cors({"origin":"*"}));
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.urlencoded({extended: false}));
 app.use("/assets/uploads", express.static(path.join(__dirname,"src", "assets", "uploads")))
