@@ -15,3 +15,5 @@ app.use("/", require("./src/routes"));
 app.listen(8888, ()=> {
   console.log("app listening on port 8888");
 });
+
+module.exports = app;
