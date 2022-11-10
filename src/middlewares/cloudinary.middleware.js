@@ -11,7 +11,7 @@ const extGenerator = (mimetype) => {
 cloudinary.config({
   cloud_name: "dvtniqszt",
   api_key: "711548627161233",
-  api_secret: "-FuEgsoKrey7Y2docvYpPbkTp9QQ"
+  api_secret: "FuEgsoKrey7Y2docvYpPbkTp9QQ"
 });
 
 const storage = new CloudinaryStorage({
