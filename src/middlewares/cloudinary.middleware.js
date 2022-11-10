@@ -15,16 +15,16 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: async (req, file) => {
-    const ext = extGenerator(file.mimetype);
-    const randString = await randomString(5);
-    return {
-      folder: "public",
-      format: ext,
-      public_id: randString,
-    };
-  },
-});
-
-module.exports = storage;
+    cloudinary: cloudinary,
+    params: async (req, file) => {
+      const ext = extGenerator(file.mimetype);
+      const randString = await randomString(5);
+      return {
+        folder: "public",
+        format: ext,
+        public_id: randString,
+      };
+    },
+  });
+  
+  module.exports = storage;

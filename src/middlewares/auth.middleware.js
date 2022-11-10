@@ -1,11 +1,10 @@
-/* eslint-disable no-undef */
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    if(authHeader){
-      if(authHeader.startsWith("Bearer ")) {
+    if(authHeader) {
+      if(authHeader.startsWith("Bearer")) {
         const token = authHeader.slice(7);
         const payload = jwt.verify(token, process.env.APP_SECRET || "default-key");
         req.userData = payload;
